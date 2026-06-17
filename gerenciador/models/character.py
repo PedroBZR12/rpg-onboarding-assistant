@@ -16,10 +16,24 @@ class Character(models.Model):
     armor_class = models.IntegerField(help_text="Classe de armadura ou defesa (CA)")
     damage_reduction = models.IntegerField(help_text="Redução de dano (RD)")
 
-    suggested_class = models.CharField(max_length=200, blank=True, null=True)
+    suggested_class = models.ForeignKey('RPGClass', on_delete=models.SET_NULL, null=True, blank=True)
+    race = models.ForeignKey('Race', on_delete=models.SET_NULL, null=True, blank=True)
     generated_profile = models.CharField(max_length=200, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+class TormentaCharacterSpecs(models.Model):
+
+    character = models.OneToOneField(Character, on_delete=models.CASCADE, related_name="ded_spec")
+
+    mana_points = models.IntegerField(default=0, help_text="PM para conjuradores arcanos/divinos")
+    
+    strength = models.IntegerField(default=10)
+    dextery = models.IntegerField(default=10)
+    constitution = models.IntegerField(default=10)
+    intelligence = models.IntegerField(default=10)
+    wisdom = models.IntegerField(default=10)
+    charisma = models.IntegerField(default=10)
 
 class DeDCharacterSpecs(models.Model):
 
