@@ -1,13 +1,11 @@
-```html
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assistente de Jornada RPG</title>
-    <!-- Tailwind CSS para estilização rápida, moderna e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter e Playfair Display para o clima clássico de RPG -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
@@ -52,7 +50,6 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-amber-500/30 selection:text-amber-200">
 
-    <!-- VIEW: CABEÇALHO -->
     <header class="border-b border-zinc-800/80 bg-zinc-950/40 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
         <div class="max-w-6xl mx-auto flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="AppController.navigateTo('home')">
@@ -65,11 +62,9 @@
         </div>
     </header>
 
-    <!-- VIEW: CORPO PRINCIPAL -->
     <main class="flex-grow flex items-center justify-center p-4 md:p-8">
         <div class="w-full max-w-4xl">
             
-            <!-- TELA 1: HOME (Escolha do Sistema com Banners de Contingência) -->
             <section id="screen-home" class="space-y-8 animate-fade-in">
                 <div class="text-center space-y-3">
                     <h1 class="rpg-title text-4xl md:text-5xl font-extrabold text-stone-100 tracking-tight">Crie o seu herói com a alma do roleplay</h1>
@@ -77,11 +72,9 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
-                    <!-- D&D 5e -->
                     <div onclick="AppController.selectSystem('D&D 5e')" class="group relative cursor-pointer overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50 hover:bg-zinc-900/80 hover:shadow-lg flex flex-col justify-between">
                         <div class="w-full h-44 overflow-hidden relative bg-zinc-950 flex items-center justify-center">
-                            <img src="../static/d&d.jpeg" alt="D&D 5e" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                            <!-- Fallback Vetorial Rúnico (D&D) -->
+                            <img src="{% static 'd&d.jpeg' %}" alt="D&D 5e" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
                             <div class="hidden w-full h-full bg-gradient-to-br from-amber-950/40 to-zinc-900 flex flex-col items-center justify-center p-4 text-amber-500/80 gap-2">
                                 <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.967 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.967 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.967 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
@@ -103,11 +96,9 @@
                         </div>
                     </div>
 
-                    <!-- Tormenta 20 -->
                     <div onclick="AppController.selectSystem('Tormenta 20')" class="group relative cursor-pointer overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50 hover:bg-zinc-900/80 hover:shadow-lg flex flex-col justify-between">
                         <div class="w-full h-44 overflow-hidden relative bg-zinc-950 flex items-center justify-center">
-                            <img src="../static/tormenta 20.jpeg" alt="Tormenta 20" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                            <!-- Fallback Vetorial Rúnico (Tormenta 20) -->
+                            <img src="{% static 'tormenta 20.jpeg' %}" alt="Tormenta 20" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
                             <div class="hidden w-full h-full bg-gradient-to-br from-red-950/40 to-zinc-900 flex flex-col items-center justify-center p-4 text-red-450/80 gap-2">
                                 <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.25 0 003 2.48z" />
@@ -129,11 +120,9 @@
                         </div>
                     </div>
 
-                    <!-- Ordem Paranormal -->
                     <div onclick="AppController.selectSystem('Ordem Paranormal')" class="group relative cursor-pointer overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50 hover:bg-zinc-900/80 hover:shadow-lg flex flex-col justify-between">
                         <div class="w-full h-44 overflow-hidden relative bg-zinc-950 flex items-center justify-center">
-                            <img src="../static/ordem paranormal.jpeg" alt="Ordem Paranormal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
-                            <!-- Fallback Vetorial Rúnico (Ordem Paranormal) -->
+                            <img src="{% static 'ordem paranormal.jpeg' %}" alt="Ordem Paranormal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
                             <div class="hidden w-full h-full bg-gradient-to-br from-blue-950/40 to-zinc-900 flex flex-col items-center justify-center p-4 text-blue-400/80 gap-2">
                                 <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -157,7 +146,6 @@
                 </div>
             </section>
 
-            <!-- TELA 2: QUESTIONÁRIO NARRATIVO -->
             <section id="screen-quiz" class="hidden space-y-6 animate-fade-in">
                 <div class="flex items-center justify-between">
                     <div>
@@ -179,12 +167,10 @@
                     </div>
 
                     <div id="quiz-options-container" class="grid grid-cols-1 gap-4">
-                        <!-- Gerado dinamicamente via JS -->
-                    </div>
+                        </div>
                 </div>
             </section>
 
-            <!-- TELA 3: CARREGAMENTO / PROCESSAMENTO -->
             <section id="screen-processing" class="hidden text-center space-y-8 py-12 animate-fade-in">
                 <div class="relative flex items-center justify-center">
                     <svg class="w-32 h-32 text-amber-500/10 absolute rune-animate" viewBox="0 0 100 100">
@@ -200,7 +186,6 @@
                 </div>
             </section>
 
-            <!-- TELA 4: RESULTADO DA FICHA GERADA -->
             <section id="screen-result" class="hidden space-y-6 animate-fade-in">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
@@ -212,15 +197,13 @@
                             Refazer Jornada
                         </button>
                         <button onclick="AppController.copySheetText()" class="flex-1 md:flex-initial text-center rounded-xl bg-amber-500 px-4 py-2 text-xs font-semibold text-zinc-950 hover:bg-amber-400 transition-colors flex items-center justify-center gap-1.5">
-                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
                             Exportar Ficha
                         </button>
                     </div>
                 </div>
 
-                <!-- Painel de Duas Colunas -->
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-                    <!-- LADO ESQUERDO: Ficha Técnica (5 colunas) -->
                     <div class="lg:col-span-5 border border-zinc-800 bg-zinc-950/60 rounded-2xl p-6 flex flex-col justify-between space-y-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
@@ -231,7 +214,6 @@
                                 <span id="char-system-badge" class="text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 rounded px-2.5 py-0.5 uppercase tracking-wider">Sistema</span>
                             </div>
 
-                            <!-- Círculo de Atributos Dinâmico -->
                             <div class="py-2 flex flex-col items-center justify-center relative">
                                 <svg class="w-56 h-56 text-zinc-800/30 absolute" viewBox="0 0 100 100">
                                     <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" />
@@ -240,25 +222,21 @@
                                     <line x1="4" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="0.2" />
                                 </svg>
                                 <div id="attributes-container" class="relative w-56 h-56 flex items-center justify-center font-mono">
-                                    <!-- Nós de atributos inseridos de forma circular pelo JS -->
-                                </div>
+                                    </div>
                             </div>
 
-                            <!-- Ajustador de Atributos manual que recalcula a lore -->
                             <button onclick="AppController.openStatsEditor()" class="w-full py-2.5 rounded-xl border border-dashed border-zinc-800 hover:border-amber-500/50 bg-zinc-900/10 hover:bg-amber-500/5 text-xs text-zinc-400 hover:text-amber-400 transition-all flex items-center justify-center gap-1.5 font-medium">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
                                 Ajustar Atributos (Recalcular Perfil)
                             </button>
                         </div>
 
-                        <!-- Antecedente e Lore -->
                         <div class="bg-zinc-900/50 rounded-xl p-4 border border-zinc-800/60 space-y-2">
                             <div class="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">Origem / Antecedente</div>
                             <p id="char-background" class="text-sm text-zinc-300 leading-relaxed">Gerando história do herói...</p>
                         </div>
                     </div>
 
-                    <!-- LADO DIREITO: Bloco Interpretativo (7 colunas) -->
                     <div class="lg:col-span-7 border border-zinc-800 bg-zinc-900/20 rounded-2xl p-6 md:p-8 flex flex-col justify-between space-y-6">
                         <div class="space-y-6">
                             <div class="space-y-1">
@@ -266,11 +244,9 @@
                                 <h3 class="rpg-title text-2xl font-bold text-stone-100">Como Interpretar em Mesa</h3>
                             </div>
                             <div class="grid grid-cols-1 gap-4" id="roleplay-tips-container">
-                                <!-- Elementos injetados pelo JS da View -->
-                            </div>
+                                </div>
                         </div>
 
-                        <!-- Bordão Sugerido -->
                         <div class="border-l-2 border-amber-500/50 pl-4 py-1 italic text-stone-300 text-sm space-y-1 bg-zinc-900/30 p-3 rounded-r-xl">
                             <div class="text-[10px] text-zinc-500 font-mono uppercase tracking-widest not-italic">Bordão Sugerido</div>
                             <span id="char-quote">"Carregando falas..."</span>
@@ -282,7 +258,6 @@
         </div>
     </main>
 
-    <!-- MODAL DE AJUSTE DOS ATRIBUTOS (VIEW) -->
     <div id="edit-stats-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-zinc-950/85 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full p-6 space-y-6 shadow-2xl animate-fade-in">
             <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
@@ -296,8 +271,7 @@
             </div>
 
             <div id="edit-stats-list" class="space-y-4">
-                <!-- Itens criados dinamicamente via JS -->
-            </div>
+                </div>
 
             <div class="flex gap-3 pt-2">
                 <button onclick="EditStatsModalView.close()" class="flex-1 py-2.5 rounded-xl bg-zinc-850 hover:bg-zinc-800 text-xs text-zinc-300 transition-colors font-semibold">
@@ -310,24 +284,17 @@
         </div>
     </div>
 
-    <!-- Notificações Flutuantes (Toasts) -->
     <div id="toast" class="fixed bottom-6 right-6 z-50 bg-zinc-900 border border-amber-500/30 text-amber-200 px-4 py-3 rounded-xl shadow-lg transition-all duration-300 transform translate-y-20 opacity-0 flex items-center gap-2">
         <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
         <span id="toast-text" class="text-xs font-semibold">Copiado!</span>
     </div>
 
-    <!-- Rodapé -->
     <footer class="border-t border-zinc-800/80 bg-zinc-950/20 py-4 px-6 text-center text-xs text-zinc-600 font-mono">
-        <div>Desenvolvido por Amora, Geovanna, Grazielle e Pedro</div>
-        <div class="mt-1 text-[10px] text-zinc-700">Faculdade de Ciências Exatas e Tecnologia / PUC-SP</div>
+        <div>Desenvolvido por Amora, Geovanna, Grazielle e Pedro [cite: 1]</div>
+        <div class="mt-1 text-[10px] text-zinc-700">Faculdade de Ciências Exatas e Tecnologia / PUC-SP [cite: 1]</div>
     </footer>
 
-    <!-- LIGAÇÃO COM O SCRIPT EXTERNO (FLASK INTEGRATION) -->
-    <!-- Quando rodar no Flask, descomente a linha abaixo e remova a estática de testes -->
-    <!-- <script src="{{ url_for('static', filename='ficha.js') }}"></script> -->
-    <script src="../static/ficha.js"></script>
+    <script src="{% static 'ficha.js' %}"></script>
 
 </body>
 </html>
-
-```
