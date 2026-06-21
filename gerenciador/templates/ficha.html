@@ -1,0 +1,300 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistente de Jornada RPG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121214;
+            color: #E2E2E6;
+        }
+        .rpg-title {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Barra de rolagem minimalista */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1c1c1f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #323238;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4d4d57;
+        }
+        @keyframes rotateRune {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .rune-animate {
+            animation: rotateRune 20s linear infinite;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.35s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-amber-500/30 selection:text-amber-200">
+
+    <header class="border-b border-zinc-800/80 bg-zinc-950/40 backdrop-blur-md sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="AppController.navigateTo('home')">
+                <svg class="w-8 h-8 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+                </svg>
+                <span class="rpg-title text-xl font-bold tracking-wide bg-gradient-to-r from-amber-200 to-amber-500 bg-clip-text text-transparent">Jornada RPG</span>
+            </div>
+            <div class="text-xs tracking-wider text-zinc-500 font-mono">VISTA (VIEW) / FRONT-END</div>
+        </div>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4 md:p-8">
+        <div class="w-full max-w-4xl">
+            
+            <section id="screen-home" class="space-y-8 animate-fade-in">
+                <div class="text-center space-y-3">
+                    <h1 class="rpg-title text-4xl md:text-5xl font-extrabold text-stone-100 tracking-tight">Crie o seu herói com a alma do roleplay</h1>
+                    <p class="text-zinc-400 max-w-xl mx-auto text-sm md:text-base">Responda a dilemas práticos de interpretação e deixe que o nosso algoritmo calcule a sua ficha e forneça dicas ricas de atuação dramática.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                    <div onclick="AppController.selectSystem('D&D 5e')" class="group relative cursor-pointer overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50 hover:bg-zinc-900/80 hover:shadow-lg flex flex-col justify-between">
+                        <div class="w-full h-44 overflow-hidden relative bg-zinc-950 flex items-center justify-center">
+                            <img src="{% static 'd&d.jpeg' %}" alt="D&D 5e" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                            <div class="hidden w-full h-full bg-gradient-to-br from-amber-950/40 to-zinc-900 flex flex-col items-center justify-center p-4 text-amber-500/80 gap-2">
+                                <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.967 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.967 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.967 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                                </svg>
+                                <span class="rpg-title text-sm tracking-widest uppercase text-amber-400 font-semibold">Fantasia Épica</span>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-full bg-amber-500/90 px-2.5 py-0.5 text-[9px] font-bold text-zinc-950 uppercase tracking-wider">Medieval Clássico</span>
+                        </div>
+                        <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="rpg-title text-2xl font-bold text-stone-100">D&D 5e</h3>
+                                <p class="text-zinc-400 text-xs leading-relaxed">O mais famoso sistema de fantasia medieval. Explore masmorras, domine feitiços e enfrente dragões.</p>
+                            </div>
+                            <div class="bg-zinc-950/60 border border-zinc-800/60 rounded-xl p-3 space-y-1">
+                                <span class="text-[9px] text-zinc-500 font-mono tracking-wider uppercase block">Cenário de Jogo</span>
+                                <p class="text-[11px] text-zinc-400 italic">Masmorras esquecidas pelo tempo, tabernas barulhentas e florestas sob o luar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div onclick="AppController.selectSystem('Tormenta 20')" class="group relative cursor-pointer overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50 hover:bg-zinc-900/80 hover:shadow-lg flex flex-col justify-between">
+                        <div class="w-full h-44 overflow-hidden relative bg-zinc-950 flex items-center justify-center">
+                            <img src="{% static 'tormenta 20.jpeg' %}" alt="Tormenta 20" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                            <div class="hidden w-full h-full bg-gradient-to-br from-red-950/40 to-zinc-900 flex flex-col items-center justify-center p-4 text-red-450/80 gap-2">
+                                <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.25 0 003 2.48z" />
+                                </svg>
+                                <span class="rpg-title text-sm tracking-widest uppercase text-red-400 font-semibold">Tormenta de Rubi</span>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-full bg-red-600/90 px-2.5 py-0.5 text-[9px] font-bold text-stone-100 uppercase tracking-wider">Épico Nacional</span>
+                        </div>
+                        <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="rpg-title text-2xl font-bold text-stone-100">Tormenta 20</h3>
+                                <p class="text-zinc-400 text-xs leading-relaxed">O principal RPG brasileiro. Enfrente monstros aberrantes numa luta desesperada em Arton.</p>
+                            </div>
+                            <div class="bg-zinc-950/60 border border-zinc-800/60 rounded-xl p-3 space-y-1">
+                                <span class="text-[9px] text-zinc-500 font-mono tracking-wider uppercase block">Cenário de Jogo</span>
+                                <p class="text-[11px] text-zinc-400 italic">O império de Arton sob a névoa corrosiva da tempestade de rubi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div onclick="AppController.selectSystem('Ordem Paranormal')" class="group relative cursor-pointer overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50 hover:bg-zinc-900/80 hover:shadow-lg flex flex-col justify-between">
+                        <div class="w-full h-44 overflow-hidden relative bg-zinc-950 flex items-center justify-center">
+                            <img src="{% static 'ordem paranormal.jpeg' %}" alt="Ordem Paranormal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+                            <div class="hidden w-full h-full bg-gradient-to-br from-blue-950/40 to-zinc-900 flex flex-col items-center justify-center p-4 text-blue-400/80 gap-2">
+                                <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                </svg>
+                                <span class="rpg-title text-sm tracking-widest uppercase text-blue-400 font-semibold">Horror Ocultista</span>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent"></div>
+                            <span class="absolute top-3 left-3 rounded-full bg-blue-600/90 px-2.5 py-0.5 text-[9px] font-bold text-stone-100 uppercase tracking-wider">Horror & Mistério</span>
+                        </div>
+                        <div class="p-6 space-y-4 flex-grow flex flex-col justify-between">
+                            <div class="space-y-2">
+                                <h3 class="rpg-title text-2xl font-bold text-stone-100">Ordem Paranormal</h3>
+                                <p class="text-zinc-400 text-xs leading-relaxed">Investigue o sobrenatural como agente. Impeça que o Outro Lado consuma a realidade.</p>
+                            </div>
+                            <div class="bg-zinc-950/60 border border-zinc-800/60 rounded-xl p-3 space-y-1">
+                                <span class="text-[9px] text-zinc-500 font-mono tracking-wider uppercase block">Cenário de Jogo</span>
+                                <p class="text-[11px] text-zinc-400 italic">Sanatórios abandonados, mistérios urbanos e conspirações secretas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="screen-quiz" class="hidden space-y-6 animate-fade-in">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <span id="quiz-system-badge" class="inline-flex items-center rounded-md bg-zinc-800 px-2.5 py-1 text-xs font-medium text-amber-400 border border-zinc-700">Sistema</span>
+                    </div>
+                    <div class="text-xs text-zinc-500 font-mono" id="quiz-progress-text">Pergunta 1 de 5</div>
+                </div>
+
+                <div class="w-full bg-zinc-900 h-2 rounded-full overflow-hidden">
+                    <div id="quiz-progress-bar" class="bg-amber-500 h-full rounded-full transition-all duration-300" style="width: 20%;"></div>
+                </div>
+
+                <div class="border border-zinc-850 bg-zinc-900/30 rounded-2xl p-6 md:p-8 space-y-8 shadow-xl">
+                    <div class="space-y-4">
+                        <div class="text-zinc-500 text-[10px] font-semibold uppercase tracking-wider font-mono">Dilema de Improviso</div>
+                        <h2 id="quiz-question-title" class="rpg-title text-xl md:text-2xl font-semibold text-stone-100 leading-relaxed">
+                            Carregando questão...
+                        </h2>
+                    </div>
+
+                    <div id="quiz-options-container" class="grid grid-cols-1 gap-4">
+                        </div>
+                </div>
+            </section>
+
+            <section id="screen-processing" class="hidden text-center space-y-8 py-12 animate-fade-in">
+                <div class="relative flex items-center justify-center">
+                    <svg class="w-32 h-32 text-amber-500/10 absolute rune-animate" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="10 4 5 4" />
+                        <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="1" />
+                        <path d="M50 5 L55 20 L45 20 Z M50 95 L55 80 L45 80 Z M5 50 L20 55 L20 45 Z M95 50 L80 55 L80 45 Z" fill="currentColor" />
+                    </svg>
+                    <div class="w-16 h-16 rounded-full border-4 border-amber-500/20 border-t-amber-500 animate-spin font-mono"></div>
+                </div>
+                <div class="space-y-2">
+                    <h2 id="processing-title" class="rpg-title text-2xl font-bold text-stone-100">Lendo os pergaminhos do destino...</h2>
+                    <p id="processing-subtitle" class="text-zinc-500 text-xs font-mono">Processando escolhas éticas e morais</p>
+                </div>
+            </section>
+
+            <section id="screen-result" class="hidden space-y-6 animate-fade-in">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h1 class="rpg-title text-3xl font-extrabold text-stone-100 tracking-tight">O seu herói desperta</h1>
+                        <p class="text-zinc-400 text-xs md:text-sm">Ficha moldada com base na vossa psicologia de jogo.</p>
+                    </div>
+                    <div class="flex gap-2 w-full md:w-auto">
+                        <button onclick="AppController.resetQuiz()" class="flex-1 md:flex-initial text-center rounded-xl bg-zinc-900 border border-zinc-800 px-4 py-2 text-xs font-medium text-zinc-300 hover:bg-zinc-800 transition-colors">
+                            Refazer Jornada
+                        </button>
+                        <button onclick="AppController.copySheetText()" class="flex-1 md:flex-initial text-center rounded-xl bg-amber-500 px-4 py-2 text-xs font-semibold text-zinc-950 hover:bg-amber-400 transition-colors flex items-center justify-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+                            Exportar Ficha
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                    <div class="lg:col-span-5 border border-zinc-800 bg-zinc-950/60 rounded-2xl p-6 flex flex-col justify-between space-y-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+                                <div>
+                                    <h2 id="char-name" class="rpg-title text-2xl font-bold text-stone-100">Carregando...</h2>
+                                    <p id="char-class" class="text-xs text-amber-500 font-mono">Classe Sugerida</p>
+                                </div>
+                                <span id="char-system-badge" class="text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700 rounded px-2.5 py-0.5 uppercase tracking-wider">Sistema</span>
+                            </div>
+
+                            <div class="py-2 flex flex-col items-center justify-center relative">
+                                <svg class="w-56 h-56 text-zinc-800/30 absolute" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="2 2" />
+                                    <circle cx="50" cy="50" r="36" fill="none" stroke="currentColor" stroke-width="0.5" />
+                                    <line x1="50" y1="4" x2="50" y2="96" stroke="currentColor" stroke-width="0.2" />
+                                    <line x1="4" y1="50" x2="96" y2="50" stroke="currentColor" stroke-width="0.2" />
+                                </svg>
+                                <div id="attributes-container" class="relative w-56 h-56 flex items-center justify-center font-mono">
+                                    </div>
+                            </div>
+
+                            <button onclick="AppController.openStatsEditor()" class="w-full py-2.5 rounded-xl border border-dashed border-zinc-800 hover:border-amber-500/50 bg-zinc-900/10 hover:bg-amber-500/5 text-xs text-zinc-400 hover:text-amber-400 transition-all flex items-center justify-center gap-1.5 font-medium">
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+                                Ajustar Atributos (Recalcular Perfil)
+                            </button>
+                        </div>
+
+                        <div class="bg-zinc-900/50 rounded-xl p-4 border border-zinc-800/60 space-y-2">
+                            <div class="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">Origem / Antecedente</div>
+                            <p id="char-background" class="text-sm text-zinc-300 leading-relaxed">Gerando história do herói...</p>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 border border-zinc-800 bg-zinc-900/20 rounded-2xl p-6 md:p-8 flex flex-col justify-between space-y-6">
+                        <div class="space-y-6">
+                            <div class="space-y-1">
+                                <div class="text-[10px] text-zinc-500 font-mono uppercase tracking-widest">Manual do Ator</div>
+                                <h3 class="rpg-title text-2xl font-bold text-stone-100">Como Interpretar em Mesa</h3>
+                            </div>
+                            <div class="grid grid-cols-1 gap-4" id="roleplay-tips-container">
+                                </div>
+                        </div>
+
+                        <div class="border-l-2 border-amber-500/50 pl-4 py-1 italic text-stone-300 text-sm space-y-1 bg-zinc-900/30 p-3 rounded-r-xl">
+                            <div class="text-[10px] text-zinc-500 font-mono uppercase tracking-widest not-italic">Bordão Sugerido</div>
+                            <span id="char-quote">"Carregando falas..."</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <div id="edit-stats-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-zinc-950/85 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl max-w-md w-full p-6 space-y-6 shadow-2xl animate-fade-in">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
+                <div>
+                    <h3 class="rpg-title text-xl font-bold text-stone-100">Modificar Valores</h3>
+                    <p class="text-xs text-zinc-500 font-mono">Altere a alocação e assista ao recálculo do perfil.</p>
+                </div>
+                <button onclick="EditStatsModalView.close()" class="text-zinc-500 hover:text-zinc-300">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+
+            <div id="edit-stats-list" class="space-y-4">
+                </div>
+
+            <div class="flex gap-3 pt-2">
+                <button onclick="EditStatsModalView.close()" class="flex-1 py-2.5 rounded-xl bg-zinc-850 hover:bg-zinc-800 text-xs text-zinc-300 transition-colors font-semibold">
+                    Cancelar
+                </button>
+                <button onclick="AppController.saveStats()" class="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-xs text-zinc-950 transition-colors font-bold">
+                    Guardar e Recalcular
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-zinc-900 border border-amber-500/30 text-amber-200 px-4 py-3 rounded-xl shadow-lg transition-all duration-300 transform translate-y-20 opacity-0 flex items-center gap-2">
+        <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        <span id="toast-text" class="text-xs font-semibold">Copiado!</span>
+    </div>
+
+    <footer class="border-t border-zinc-800/80 bg-zinc-950/20 py-4 px-6 text-center text-xs text-zinc-600 font-mono">
+        <div>Desenvolvido por Amora, Geovanna, Grazielle e Pedro [cite: 1]</div>
+        <div class="mt-1 text-[10px] text-zinc-700">Faculdade de Ciências Exatas e Tecnologia / PUC-SP [cite: 1]</div>
+    </footer>
+
+    <script src="{% static 'ficha.js' %}"></script>
+
+</body>
+</html>

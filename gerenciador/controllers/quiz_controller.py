@@ -1,8 +1,8 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from ..models import Question
-from serializers.questions_serializers import QuestionSerializer
+from gerenciador.models import Question
+from gerenciador.controllers.serializers.questions_serializers import QuestionSerializer
 
 """
     Controlador responsável por entregar as perguntas e alternativas do quiz.
