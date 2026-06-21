@@ -1,8 +1,8 @@
 from django.db import models
-from .system import System
+
 
 class RPGClass(models.Model):
-    system = models.ForeignKey(System, on_delete=models.CASCADE, related_name='classes')
+    system = models.ForeignKey('System', on_delete=models.CASCADE, related_name='classes')
     name = models.CharField(max_length=100) # Ex: Mago, Guerreiro, Combatente
     
     

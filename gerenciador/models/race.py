@@ -1,8 +1,7 @@
 from django.db import models
-from .system import System
 
 class Race(models.Model):
-    system = models.ForeignKey(System, on_delete=models.CASCADE, related_name='races')
+    system = models.ForeignKey('System', on_delete=models.CASCADE, related_name='races')
     name = models.CharField(max_length=100) # Ex: Anão, Elfo, Humano
     
     # Bônus ou penalidades de atributos que a raça concede

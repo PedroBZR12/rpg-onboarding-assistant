@@ -1,5 +1,4 @@
 from django.db import models
-from .system import System  # Importa o sistema correspondente
 
 class Tips(models.Model):
    
@@ -10,7 +9,7 @@ class Tips(models.Model):
         ('CHA', 'Social / Diplomata'),
     ]
 
-    system = models.ForeignKey(System, on_delete=models.CASCADE, related_name='tips')
+    system = models.ForeignKey('System', on_delete=models.CASCADE, related_name='tips')
     target_profile = models.CharField(
         max_length=3, 
         choices=PROFILE_CHOICES,

@@ -1,10 +1,8 @@
 from django.db import models
 
-from gerenciador.models.system import System
-
 class Character(models.Model):
 
-    system = models.ForeignKey(System, on_delete=models.CASCADE, related_name='character')
+    system = models.ForeignKey('System', on_delete=models.CASCADE, related_name='character')
 
     name = models.CharField(max_length=150)
     age = models.IntegerField(blank=True, null=True)
@@ -24,7 +22,7 @@ class Character(models.Model):
 
 class TormentaCharacterSpecs(models.Model):
 
-    character = models.OneToOneField(Character, on_delete=models.CASCADE, related_name="ded_spec")
+    character = models.OneToOneField('Character', on_delete=models.CASCADE, related_name="tormenmta_spec")
 
     mana_points = models.IntegerField(default=0, help_text="PM para conjuradores arcanos/divinos")
     
@@ -37,7 +35,7 @@ class TormentaCharacterSpecs(models.Model):
 
 class DeDCharacterSpecs(models.Model):
 
-    character = models.OneToOneField(Character, on_delete=models.CASCADE, related_name="ded_spec")
+    character = models.OneToOneField('Character', on_delete=models.CASCADE, related_name="ded_spec")
 
     mana_points = models.IntegerField(default=0, help_text="PM para conjuradores arcanos/divinos")
     
@@ -50,7 +48,7 @@ class DeDCharacterSpecs(models.Model):
 
 class OrdemCharacterSpecs(models.Model):
 
-    character = models.OneToOneField(Character, on_delete=models.CASCADE, related_name="ordem_spec")
+    character = models.OneToOneField('Character', on_delete=models.CASCADE, related_name="ordem_spec")
 
     strength = models.IntegerField(default=1)
     agility = models.IntegerField(default=1)

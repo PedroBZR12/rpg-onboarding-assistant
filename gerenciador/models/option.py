@@ -1,5 +1,4 @@
 from django.db import models
-from .question import Question
 
 class Option(models.Model):
    
@@ -12,7 +11,7 @@ class Option(models.Model):
         ('CHA', 'Charisma / Carisma'),
     ]
 
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='options')
+    question = models.ForeignKey('Question', on_delete=models.CASCADE, related_name='options')
     text = models.CharField(max_length=255)
     
     target_attribute = models.CharField(
